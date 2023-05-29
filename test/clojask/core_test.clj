@@ -46,7 +46,7 @@
     (is (= clojask.classes.DataFrame.DataFrame (type (operate y str ["Employee" "Salary"] "new-col"))))
     (is (= clojask.classes.DataFrame.DataFrame (type (group-by y ["Department"]))))
     (is (= clojask.classes.DataFrame.DataFrame (type (aggregate y max ["Salary"] ["Salary-max"]))))
-    (is (= clojask.classes.DataFrame.DataFrame (type (compute y 8 "test/clojask/test_outputs/tmp.csv"))))
+    (is (= clojask.classes.DataFrame.DataFrame (type (compute y 8 "./test/clojask/test_outputs/tmp.csv"))))
     ))
 
 (deftest df-api-output-test

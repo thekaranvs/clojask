@@ -16,7 +16,8 @@
             [clojure.pprint :as pprint]
             [clojask.classes.DataStat :refer [compute-stat]]
             [clojask-io.input :refer [read-file]]
-            [clojask.join.outer-output :as output])
+            [clojask.join.outer-output :as output]
+            [clojure.string :as str :refer [last-index-of]])
   (:import [clojask.classes.ColInfo ColInfo]
            [clojask.classes.RowInfo RowInfo]
            [clojask.classes.DataStat DataStat]
@@ -67,6 +68,14 @@
   (errorPredetect [msg] "prints exception with msg if error is detected in preview")
   (rollback [] "rollback the history of ColInfo and RowInfo")
   (commit [] "commit the change"))
+
+;; function to create output directory (if required)
+(defn- createDirectory [filePath]
+  (when (not (nil? filePath)) ;; simple check to ensure filePath given isn't null
+    (let [lastSlashIndex (last-index-of filePath "/")]
+      (when (not (nil? lastSlashIndex)) ;; if only file name is given e.g. result.csv, don't create dir.
+        (let [outputDirectory (subs filePath 0 lastSlashIndex)]
+          (.mkdir (java.io.File. outputDirectory)))))))
 
 ;; each dataframe can have a delayed object
 (defrecord DataFrame
@@ -133,6 +142,7 @@
       ;; (if (<= num-worker 8)
       (if true
         (do
+          (createDirectory output-dir)
           (if (= ifheader true) (.printCol this output-dir index out))
           (let [res (start-onyx num-worker batch-size this output-dir exception order index melt out)]
             (if (= res "success")

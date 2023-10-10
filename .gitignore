@@ -1,7 +1,6 @@
 .DS_Store
 onyx.log*
 *.log
-resources/
 outputs/
 test/clojask/test_outputs/*
 .lein-failures

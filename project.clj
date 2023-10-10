@@ -1,4 +1,4 @@
-(defproject com.github.clojure-finance/clojask "2.0.1"
+(defproject com.github.clojure-finance/clojask "2.0.2"
   :description "Data analysis and manipulation library with parallel computing for larger-than-memory datasets"
   :url "https://github.com/clojure-finance/clojask"
   :license {:name "MIT"
@@ -7,7 +7,7 @@
                 ;;  [org.clojure/math.numeric-tower "0.0.4"]
                  [org.clojure/data.csv "1.0.0"]
                  ^{:voom {:repo "git@github.com:onyx-platform/onyx.git" :branch "master"}}
-                 [org.onyxmod/onyx "0.1.0"]
+                 [com.github.clojure-finance/onyx "0.1.0"]
                  [com.taoensso/timbre "5.2.1"]
                  [io.aeron/aeron-client "1.40.0" :exclusions [org.agrona/agrona]]
                  [org.agrona/agrona "1.18.0"]
